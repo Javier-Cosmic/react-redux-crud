@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-weight: 400;
+}
+
+body {
+  background: linear-gradient(180deg, #EB4460 50%, #162447 50%);
+  height: 95vh;
+  font-family: "Rubik", sans-serif;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas: "data form";
+  grid-column-gap: 3rem;
+  height: 470px;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.title {
+  color: white;
+  margin: 33px 0;
+  font-weight: 400;
+  font-size: 43px;
+}
+
+.form-user {
+  background-color: #1F4068;
+  grid-area: form;
+  border-radius: 10px;
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-inside {
+  margin: 35px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  color: white;
+  margin-bottom: 3px;
+}
+
+label:nth-child(2n+3) {
+  color: white;
+  margin-top: 15px;
+}
+
+input {
+  background-color: #162447;
+  outline: none;
+  border-style: none;
+  height: 25px;
+  border-radius: 5px;
+  color: #8191BC;
+  padding: 5px;
+}
+input:focus {
+  border-bottom: 2px solid #EB4460;
+}
+
+.data-user {
+  background-color: #1F4068;
+  grid-area: data;
+  border-radius: 10px;
+  box-shadow: 5px 2px 15px rgba(0, 0, 0, 0.3);
+}
+
+.box-inside {
+  background-color: #162447;
+  margin: 35px;
+  height: 415px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  color: white;
+  font-size: 14px;
+  text-align: left;
+  border-collapse: collapse;
+}
+table thead {
+  background-color: #1B1B2F;
+}
+table th, table td {
+  padding: 10px 5px;
+}
+table tr:hover {
+  background-color: #1B1B2F;
+}
+
+.icon-edit {
+  filter: invert(1);
+  font-size: 16px;
+  height: 20px;
+  margin-left: 0.4rem;
+}
+.icon-edit:hover {
+  filter: invert(47%) sepia(64%) saturate(6340%) hue-rotate(330deg) brightness(101%) contrast(84%);
+  cursor: pointer;
+}
+
+.icon-remove {
+  filter: invert(1);
+  font-size: 16px;
+  height: 20px;
+  margin-left: 0.9rem;
+}
+.icon-remove:hover {
+  filter: invert(47%) sepia(64%) saturate(6340%) hue-rotate(330deg) brightness(101%) contrast(84%);
+  cursor: pointer;
+}
+
+.button-submit {
+  background-color: #EB4460;
+  border-style: none;
+  appearance: none;
+  margin-top: 25px;
+  color: white;
+  border-radius: 10px;
+  height: 35px;
+  cursor: pointer;
+}
+.button-submit:hover {
+  background-color: #D24058;
+}
+
+/*# sourceMappingURL=styles.css.map */
