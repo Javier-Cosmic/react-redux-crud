@@ -9,7 +9,8 @@ import {
     EDIT_CURRENT_USER,
     EDIT_USER_DATA, 
     DELETE_USER,
-    DELETE_USER_DATA
+    DELETE_USER_DATA,
+    MENU
 } from '../types';
 
 export const msgError = (error) => {
@@ -23,6 +24,12 @@ export const msgSuccess = (success) => {
     return{
         type: MSG_SUCCESS,
         payload: success
+    }
+}
+
+export const menuButton = () => {
+    return{
+        type: MENU
     }
 }
 

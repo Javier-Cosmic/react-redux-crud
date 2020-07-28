@@ -6,13 +6,15 @@ import {
     EDIT_CURRENT_USER,
     EDIT_USER_DATA,
     DELETE_USER_DATA,
+    MENU
 } from '../types';
 
 const initialState = {
     users: [],
     usercurrent: null,
     error: null,
-    success: null
+    success: null,
+    menu: false
 }
 
 export default (state = initialState, action) => {
@@ -46,7 +48,8 @@ export default (state = initialState, action) => {
         case EDIT_CURRENT_USER:
             return{
                 ...state,
-                usercurrent: action.payload
+                usercurrent: action.payload,
+                menu: true
             }
 
         case EDIT_USER_DATA:
@@ -60,6 +63,13 @@ export default (state = initialState, action) => {
             return{
                 ...state,
                 users: state.users.filter(user => user._id !== action.payload)
+            }
+        
+        case MENU:
+            return{
+                ...state,
+                menu: !state.menu,
+                usercurrent: null
             }
 
 

@@ -7,7 +7,7 @@
 
 body {
   background: linear-gradient(180deg, #EB4460 50%, #162447 50%);
-  height: 95vh;
+  height: 100vh;
   font-family: "Rubik", sans-serif;
 }
 
@@ -16,12 +16,32 @@ body {
   grid-template-columns: 2fr 1fr;
   grid-template-areas: "data form";
   grid-column-gap: 3rem;
-  height: 470px;
+  max-height: 470px;
 }
 
 .container {
   width: 80%;
   margin: 0 auto;
+}
+
+@media (max-width: 1280px) {
+  .container {
+    width: 90%;
+  }
+
+  .main {
+    grid-column-gap: 2rem;
+  }
+}
+@media (max-width: 1126px) {
+  .main {
+    grid-template-columns: 1fr;
+    grid-template-areas: "data";
+  }
+}
+.header-bar {
+  display: flex;
+  justify-content: space-between;
 }
 
 .title {
@@ -30,12 +50,27 @@ body {
   font-weight: 400;
   font-size: 43px;
 }
+@media (max-width: 700px) {
+  .title {
+    font-size: 35px;
+  }
+}
+@media (max-width: 600px) {
+  .title {
+    font-size: 28px;
+  }
+}
+@media (max-width: 345px) {
+  .title {
+    font-size: 22px;
+  }
+}
 
 .form-user {
   background-color: #1F4068;
-  grid-area: form;
   border-radius: 10px;
   box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.2);
+  grid-area: form;
 }
 
 .form-inside {
@@ -62,46 +97,82 @@ input {
   border-radius: 5px;
   color: #8191BC;
   padding: 5px;
+  font-size: 16px;
 }
 input:focus {
   border-bottom: 2px solid #EB4460;
 }
 
-.data-user {
-  background-color: #1F4068;
-  grid-area: data;
+@media (max-width: 1126px) {
+  .form-user {
+    display: none;
+    transition: all 1s;
+  }
+
+  .form-menu {
+    background-color: #1F4068;
+    border-radius: 10px;
+    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.2);
+    grid-area: form;
+    padding: 10px 1px;
+    transition: all 1s;
+  }
+}
+.table-container {
+  overflow: auto;
+  max-height: 500px;
+  height: 75vh;
   border-radius: 10px;
   box-shadow: 5px 2px 15px rgba(0, 0, 0, 0.3);
+  background-color: #1F4068;
+  grid-area: data;
 }
 
-.box-inside {
-  background-color: #162447;
-  margin: 35px;
-  height: 415px;
-  overflow: auto;
-}
-
-table {
+.table-data {
   width: 100%;
   color: white;
   font-size: 14px;
   text-align: left;
   border-collapse: collapse;
+  overflow: auto;
 }
-table thead {
+.table-data .table-sticky th {
+  position: sticky;
+  z-index: 40;
+  top: 0px;
   background-color: #1B1B2F;
 }
-table th, table td {
+.table-data th, .table-data td {
   padding: 10px 5px;
 }
-table tr:hover {
+.table-data tr:hover {
   background-color: #1B1B2F;
 }
+.table-data tbody {
+  background-color: #1F4068;
+}
 
+@media (max-width: 700px) {
+  .table-sticky th {
+    min-width: 18vh;
+  }
+}
+@media (max-width: 375px) {
+  .table-sticky th {
+    min-width: 16.5vh;
+  }
+}
+@media (max-width: 1106px) {
+  thead tr {
+    width: auto;
+  }
+}
 .icon-edit {
   filter: invert(1);
   font-size: 16px;
   height: 20px;
+  z-index: 0;
+  position: relative;
   margin-left: 0.4rem;
 }
 .icon-edit:hover {
@@ -113,6 +184,8 @@ table tr:hover {
   filter: invert(1);
   font-size: 16px;
   height: 20px;
+  z-index: 0;
+  position: relative;
   margin-left: 0.9rem;
 }
 .icon-remove:hover {
@@ -132,6 +205,92 @@ table tr:hover {
 }
 .button-submit:hover {
   background-color: #D24058;
+}
+
+.menu {
+  height: 20px;
+  z-index: 30;
+  margin-top: 3.2rem;
+  filter: invert(1);
+  cursor: pointer;
+}
+@media (min-width: 1126px) {
+  .menu {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .menu {
+    margin-top: 2.9rem;
+  }
+}
+@media (max-width: 600px) {
+  .menu {
+    margin-top: 2.5rem;
+  }
+}
+@media (max-width: 345px) {
+  .menu {
+    margin-top: 2.3rem;
+  }
+}
+
+.menu-container {
+  position: fixed;
+  right: 0;
+  z-index: 50;
+  width: 60%;
+  background-color: #EB4460;
+  height: 100vh;
+  box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.9);
+  transition: all 0.9s;
+  padding: 60px;
+}
+@media (min-width: 1126px) {
+  .menu-container {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .menu-container {
+    width: 71%;
+  }
+}
+@media (max-width: 600px) {
+  .menu-container {
+    padding: 40px;
+  }
+}
+@media (max-width: 530px) {
+  .menu-container {
+    width: 80%;
+  }
+}
+@media (max-width: 400px) {
+  .menu-container {
+    width: 90%;
+    padding: 30px;
+  }
+}
+
+.hidden {
+  transform: translateX(700px);
+  transition: all 0.8s;
+  opacity: 0.5;
+}
+
+.close {
+  position: relative;
+}
+
+.close-menu {
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  position: absolute;
+  right: 10px;
+  top: 3px;
+  font-size: 25px;
 }
 
 /*# sourceMappingURL=styles.css.map */

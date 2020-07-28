@@ -1,3 +1,7 @@
+export const MENU = 'MENU';
+export const SHOW_ALERT = 'SHOW_ALERT';
+export const HIDE_ALERT = 'HIDE_ALERT';
+
 export const LOAD_USER = 'LOAD_USER';
 export const SHOW_USER = 'SHOW_USER';
 export const MSG_SUCCESS = 'MSG_SUCCES';
