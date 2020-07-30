@@ -10,8 +10,17 @@ import {
     EDIT_USER_DATA, 
     DELETE_USER,
     DELETE_USER_DATA,
-    MENU
+    MENU,
+    LOADING_SPINNER
 } from '../types';
+
+
+export const loading = (isLoading) => {
+    return{
+        type: LOADING_SPINNER,
+        payload: isLoading
+    }
+}
 
 export const msgError = (error) => {
     return{

@@ -1,5 +1,9 @@
 export const MENU = 'MENU';
-export const SHOW_ALERT = 'SHOW_ALERT';
+export const LOADING_SPINNER = 'LOADING_SPINNER';
+export const LOADING = 'LOADING';
+
+export const ALERT = 'ALERT';
+export const ALERT_SUCCESS = 'ALERT_SUCCESS';
 export const HIDE_ALERT = 'HIDE_ALERT';
 
 export const LOAD_USER = 'LOAD_USER';

@@ -10,17 +10,23 @@ import {
     MSG_ERROR,
     MSG_SUCCESS,
     DELETE_USER,
-    DELETE_USER_DATA
+    DELETE_USER_DATA,
+    LOADING_SPINNER
+  
 } from '../types'
 
 const url = process.env.REACT_APP_API_URL
 
+
 function* getUsers(){
     
+    yield put({type: LOADING_SPINNER, payload: true});
+
     try {
         const results = yield call(axios.get, url);
 
         yield put(loadDataUsers(results.data.users));
+        yield put({type: LOADING_SPINNER, payload: false});
 
     } catch (error) {
         console.log(error);
@@ -58,8 +64,8 @@ function* deleteUser({ payload }){
     try {
         const results = yield call(axios.delete, url+payload);
         
-        yield put({ type: DELETE_USER_DATA, payload: payload})
-        yield put({ type: MSG_SUCCESS, payload: results.data.msg})
+        yield put({ type: DELETE_USER_DATA, payload: payload});
+        yield put({ type: MSG_SUCCESS, payload: results.data.msg});
 
     } catch (error) {
         console.log(error);

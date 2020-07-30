@@ -1,22 +1,30 @@
-import {HIDE_ALERT, SHOW_ALERT} from '../types';
+import {HIDE_ALERT, ALERT, ALERT_SUCCESS} from '../types';
 
 const intialState = {
-    alert: null
+    alert: null,
+    alertsuccess: null
 }
 
 export default function(state = intialState, action){
     switch(action.type){
 
-        case SHOW_ALERT:
+        case ALERT:
             return{
                 ...state,
                 alert: action.payload
+            }
+
+        case ALERT_SUCCESS:
+            return{
+                ...state,
+                alertsuccess: action.payload
             }
             
         case HIDE_ALERT:
             return {
                 ...state,
-                alert: null
+                alert: null,
+                alertsuccess: null
             }
             
         default:

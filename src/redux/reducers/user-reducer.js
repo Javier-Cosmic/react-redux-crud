@@ -6,7 +6,8 @@ import {
     EDIT_CURRENT_USER,
     EDIT_USER_DATA,
     DELETE_USER_DATA,
-    MENU
+    MENU,
+    LOADING_SPINNER,
 } from '../types';
 
 const initialState = {
@@ -14,67 +15,86 @@ const initialState = {
     usercurrent: null,
     error: null,
     success: null,
-    menu: false
-}
+    menu: false,
+    loading: false,
+};
 
 export default (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
+        
+        case LOADING_SPINNER:
+            return{
+                ...state,
+                loading: action.payload
+            }
 
         case SHOW_USER:
-            return{
+            return {
                 ...state,
                 users: action.payload,
-                error: null
-            }
+                error: null,
+            };
 
         case ADD_USER_DATA:
-            return{
+            return {
                 ...state,
-                users: [action.payload, ...state.users]
-            }
-        
-        case MSG_ERROR:
-            return{
-                ...state,
-                error: action.payload
-            }
-
-        case MSG_SUCCESS:
-            return{
-                ...state,
-                success: action.payload
-            }
+                users: [action.payload, ...state.users],
+                menu: false,
+                success: null,
+                error: null
+            };
 
         case EDIT_CURRENT_USER:
-            return{
+            return {
                 ...state,
                 usercurrent: action.payload,
-                menu: true
-            }
+                menu: true,
+                error: null
+            };
 
         case EDIT_USER_DATA:
-            return{
+            return {
                 ...state,
-                users: state.users.map(user => user._id === state.usercurrent._id ? action.payload : user),
-                usercurrent: null
-            }
-        
+                users: state.users.map((user) =>
+                    user._id === state.usercurrent._id ? action.payload : user
+                ),
+                usercurrent: null,
+                menu: false,
+                success: null,
+                error: null
+            };
+
         case DELETE_USER_DATA:
-            return{
+            return {
                 ...state,
-                users: state.users.filter(user => user._id !== action.payload)
-            }
-        
+                users: state.users.filter(
+                    (user) => user._id !== action.payload
+                ),
+                success: null,
+                error: null,
+                usercurrent: null
+            };
+
+        case MSG_ERROR:
+            return {
+                ...state,
+                error: action.payload,
+            };
+
+        case MSG_SUCCESS:
+            return {
+                ...state,
+                success: action.payload,
+            };
+
         case MENU:
-            return{
+            return {
                 ...state,
                 menu: !state.menu,
-                usercurrent: null
-            }
-
+                usercurrent: null,
+            };
 
         default:
-            return state
+            return state;
     }
-}
-
+};

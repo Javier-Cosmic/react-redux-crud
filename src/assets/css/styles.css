@@ -74,7 +74,7 @@ body {
 }
 
 .form-inside {
-  margin: 35px;
+  margin: 40px;
   display: flex;
   flex-direction: column;
 }
@@ -112,10 +112,17 @@ input:focus {
   .form-menu {
     background-color: #1F4068;
     border-radius: 10px;
-    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.25);
     grid-area: form;
-    padding: 10px 1px;
+    padding: 10px 0px;
+    padding-bottom: 10px;
     transition: all 1s;
+  }
+
+  .form-inside {
+    margin: 25px;
+    display: flex;
+    flex-direction: column;
   }
 }
 .table-container {
@@ -123,7 +130,7 @@ input:focus {
   max-height: 500px;
   height: 75vh;
   border-radius: 10px;
-  box-shadow: 5px 2px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
   background-color: #1F4068;
   grid-area: data;
 }
@@ -243,7 +250,7 @@ input:focus {
   background-color: #EB4460;
   height: 100vh;
   box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.9);
-  transition: all 0.9s;
+  transition: all 0.4s ease-out;
   padding: 60px;
 }
 @media (min-width: 1126px) {
@@ -275,8 +282,8 @@ input:focus {
 
 .hidden {
   transform: translateX(700px);
-  transition: all 0.8s;
-  opacity: 0.5;
+  transition: all 0.35s ease-in;
+  opacity: 0.1;
 }
 
 .close {
@@ -291,6 +298,89 @@ input:focus {
   right: 10px;
   top: 3px;
   font-size: 25px;
+}
+.close-menu:hover {
+  cursor: pointer;
+}
+
+.alert-main {
+  position: relative;
+}
+
+@keyframes fade-left {
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+  from {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+.alert {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  width: 100%;
+  padding: 0.4em;
+  background-color: #FFC6CF;
+  color: red;
+  animation: 0.3s ease-in fade-left alternate-reverse;
+  margin-top: 1.6rem;
+  border: 2px solid red;
+  opacity: 0.8;
+  font-size: 15px;
+}
+@media (max-width: 1126px) {
+  .alert {
+    top: 40px;
+  }
+}
+
+.alert-success {
+  background-color: #a1f5cb;
+  color: #316C2E;
+  padding: 0.8rem;
+  font-weight: 450;
+  position: absolute;
+  top: 1.9rem;
+  border: 2.3px solid #34BC2D;
+  opacity: 0.9;
+  border-radius: 10px;
+  z-index: 90;
+  animation: 0.3s up ease-in alternate-reverse;
+}
+
+@keyframes up {
+  to {
+    top: -20px;
+    opacity: 0;
+  }
+  from {
+    top: 1.9rem;
+    opacity: 0.9;
+  }
+}
+.loading {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid #162447;
+  border-radius: 50%;
+  border-top: 2px solid #EB4460;
+  animation: 1s spinner infinite;
+}
+
+@keyframes spinner {
+  to {
+    rotate: 360deg;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

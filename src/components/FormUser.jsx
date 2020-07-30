@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUser, editUser } from '../redux/actions/user-action';
-import { showAlert } from '../redux/actions/alert-action';
+import {
+    addUser,
+    editUser
+} from '../redux/actions/user-action';
+import { showAlert, hiddeAlert } from '../redux/actions/alert-action';
 
 const Form = ({ menu }) => {
     const dispatch = useDispatch();
     const usercurrent = useSelector((state) => state.user_reducer.usercurrent);
+    const alert = useSelector((state) => state.alert_reducer.alert);
+    const error = useSelector(state => state.user_reducer.error);
 
     const empty = {
         rut: '',
@@ -18,6 +23,16 @@ const Form = ({ menu }) => {
     const [user, setUser] = useState(empty);
 
     const { rut, name, lastname, age, nationality, cellphone } = user;
+
+    const existError = () => {
+        if(error){
+            dispatch(showAlert(error));
+            console.log('debuggeando los errores')
+            setTimeout(() => {
+                dispatch(hiddeAlert());
+            }, 3000);
+        }
+    }
 
     useEffect(() => {
         //verificar si hay datos en el usuario actual
@@ -32,8 +47,12 @@ const Form = ({ menu }) => {
                 nationality: '',
                 cellphone: '',
             });
+            //verificar alertas de error
+            existError();
         }
-    }, [usercurrent]);
+
+
+    }, [usercurrent, error]);
 
     const onChange = (e) => {
         setUser({
@@ -47,20 +66,6 @@ const Form = ({ menu }) => {
 
         //identificar si es agregar o editar
         if (usercurrent !== null) {
-            
-            if (
-                rut.trim() === '' ||
-                name.trim() === '' ||
-                lastname.trim() === '' ||
-                age.trim() === '' ||
-                nationality.trim() === '' ||
-                cellphone.trim() === ''
-            ) {
-
-                dispatch(showAlert('Todos los campos son obligatorios.'));
-                return;
-            }
-
             //edita usuario
             dispatch(
                 editUser({
@@ -73,7 +78,27 @@ const Form = ({ menu }) => {
                     cellphone,
                 })
             );
+
+            setUser(empty); 
+
         } else {
+            if (
+                rut.trim() === '' ||
+                name.trim() === '' ||
+                lastname.trim() === '' ||
+                age.trim() === '' ||
+                nationality.trim() === '' ||
+                cellphone.trim() === ''
+            ) {
+                dispatch(showAlert('Los campos son obligatorios.'));
+
+                setTimeout(() => {
+                    dispatch(hiddeAlert());
+                }, 3000);
+
+                return;
+            }
+
             //agregar usuario
             dispatch(
                 addUser({
@@ -85,65 +110,75 @@ const Form = ({ menu }) => {
                     cellphone,
                 })
             );
+            
+            setUser(empty)
         }
-
-        setUser(empty);
     };
 
     return (
-        <div className={menu ? 'form-menu' : 'form-user'}>
-            <form onSubmit={onSubmit}>
-                <div className='form-inside'>
-                    <label>Rut</label>
-                    <input
-                        type='text'
-                        name='rut'
-                        value={rut}
-                        onChange={onChange}
-                    />
-                    <label>Nombre</label>
-                    <input
-                        type='text'
-                        name='name'
-                        value={name}
-                        onChange={onChange}
-                    />
-                    <label>Apellido</label>
-                    <input
-                        type='text'
-                        name='lastname'
-                        value={lastname}
-                        onChange={onChange}
-                    />
-                    <label>Edad</label>
-                    <input
-                        type='number'
-                        name='age'
-                        value={age}
-                        onChange={onChange}
-                    />
-                    <label>Nacionalidad</label>
-                    <input
-                        type='text'
-                        name='nationality'
-                        value={nationality}
-                        onChange={onChange}
-                    />
-                    <label>N° Celular</label>
-                    <input
-                        type='number'
-                        name='cellphone'
-                        value={cellphone}
-                        onChange={onChange}
-                    />
-                    <input
-                        type='submit'
-                        className='button-submit'
-                        value={usercurrent !== null ? 'Editar' : 'Agregar'}
-                    />
-                </div>
-            </form>
-        </div>
+        <>
+            <div className={menu ? 'form-menu' : 'form-user'}>
+                <form onSubmit={onSubmit}>
+                    <div className='form-inside'>
+                        <label>Rut</label>
+                        <input
+                            type='text'
+                            name='rut'
+                            value={rut}
+                            onChange={onChange}
+                        />
+                        <label>Nombre</label>
+                        <input
+                            type='text'
+                            name='name'
+                            value={name}
+                            onChange={onChange}
+                        />
+                        <label>Apellido</label>
+                        <input
+                            type='text'
+                            name='lastname'
+                            value={lastname}
+                            onChange={onChange}
+                        />
+                        <label>Edad</label>
+                        <input
+                            type='number'
+                            name='age'
+                            value={age}
+                            onChange={onChange}
+                        />
+                        <label>Nacionalidad</label>
+                        <input
+                            type='text'
+                            name='nationality'
+                            value={nationality}
+                            onChange={onChange}
+                        />
+                        <label>N° Celular</label>
+                        <input
+                            type='number'
+                            name='cellphone'
+                            value={cellphone}
+                            onChange={onChange}
+                        />
+                        {alert ? (
+                            <div className='alert-main'>
+                                <div className='alert'>{alert}</div>
+                            </div>
+                        ) : (
+                            <input
+                                type='submit'
+                                className='button-submit'
+                                value={
+                                    usercurrent !== null ? 'Editar' : 'Agregar'
+                                }
+                            />
+                        )}
+                    </div>
+                </form>
+            </div>
+        </>
     );
 };
 
