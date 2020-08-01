@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCurrentUser, deleteUser } from '../redux/actions/user-action';
 import logoEdit from '../assets/icons/editar.svg';
 import logoRemove from '../assets/icons/borrador.svg';
 
-const ListUser = React.memo( ({ user }) => {
+const ListUser = ({ user }) => {
     const dispatch = useDispatch();
+    const [msg, setMsg] = useState(false);
 
     const editUser = () => {
         //obtener usuario actual
@@ -17,8 +18,13 @@ const ListUser = React.memo( ({ user }) => {
         dispatch(deleteUser(user._id));
     };
 
+    //mostrar mensaje antes de eliminar
+    const showHover = () => {
+        setMsg(!msg);
+    };
+
     return (
-        <tbody>
+            <tbody>
                 <tr>
                     <td>{user.rut}</td>
                     <td>{user.name}</td>
@@ -36,13 +42,16 @@ const ListUser = React.memo( ({ user }) => {
                         <img
                             src={logoRemove}
                             onClick={removeUser}
+                            onMouseOver={showHover}
+                            onMouseOut={showHover}
                             className='icon-remove'
                             alt='icon-remove'
                         />
+                        {msg ? <p className='msg-parent'><span className='msg-delete'>¿Estas seguro?</span></p> : null}
                     </td>
                 </tr>
-        </tbody>
+            </tbody>
     );
-});
+};
 
 export default ListUser;

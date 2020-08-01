@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 users: action.payload,
-                error: null,
+                // error: null,
             };
 
         case ADD_USER_DATA:
@@ -41,7 +41,7 @@ export default (state = initialState, action) => {
                 users: [action.payload, ...state.users],
                 menu: false,
                 success: null,
-                error: null
+                error: false
             };
 
         case EDIT_CURRENT_USER:
@@ -49,7 +49,7 @@ export default (state = initialState, action) => {
                 ...state,
                 usercurrent: action.payload,
                 menu: true,
-                error: null
+                // error: null
             };
 
         case EDIT_USER_DATA:
@@ -61,7 +61,7 @@ export default (state = initialState, action) => {
                 usercurrent: null,
                 menu: false,
                 success: null,
-                error: null
+                // error: null
             };
 
         case DELETE_USER_DATA:
@@ -71,7 +71,7 @@ export default (state = initialState, action) => {
                     (user) => user._id !== action.payload
                 ),
                 success: null,
-                error: null,
+                // error: null,
                 usercurrent: null
             };
 

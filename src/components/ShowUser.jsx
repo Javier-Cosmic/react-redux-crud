@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {loadUsers} from '../redux/actions/user-action';
-import ListUser from './ListUser';
+import { loadUsers } from '../redux/actions/user-action';
+import ListUser from '../components/ListUser';
 
-const ShowUser = React.memo(() => {
+const ShowUser = () => {
     const dispatch = useDispatch();
     const users = useSelector((state) => state.user_reducer.users);
 
@@ -13,8 +13,8 @@ const ShowUser = React.memo(() => {
     };
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         loadingUser();
+        //eslint-disable-next-line
     }, []);
 
     return (
@@ -35,6 +35,6 @@ const ShowUser = React.memo(() => {
             ))}
         </table>
     );
-});
+};
 
 export default ShowUser;

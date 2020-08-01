@@ -43,6 +43,7 @@ function* addUser({ payload }){
 
     } catch (error) {
         yield put({ type: MSG_ERROR, payload: error.response.data.msg });
+        yield put({ type: MSG_ERROR, payload: null });
     }
 }
 

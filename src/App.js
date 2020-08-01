@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import './assets/css/styles.css';
-import MainUser from './components/MainUser';
+const MainUser = React.lazy(() => import('./components/MainUser'));
 
 function App() {
-
-  return (
-    <main className='container'>
-        <MainUser />
-    </main>
-  );
+    return (
+        <Suspense fallback=''>
+            <main className='container'>
+                <MainUser />
+            </main>
+        </Suspense>
+    );
 }
 
 export default App;

@@ -9,6 +9,7 @@ body {
   background: linear-gradient(180deg, #EB4460 50%, #162447 50%);
   height: 100vh;
   font-family: "Rubik", sans-serif;
+  font-size: 16px;
 }
 
 .main {
@@ -209,6 +210,7 @@ input:focus {
   border-radius: 10px;
   height: 35px;
   cursor: pointer;
+  font-family: "Rubik", sans-serif;
 }
 .button-submit:hover {
   background-color: #D24058;
@@ -220,11 +222,6 @@ input:focus {
   margin-top: 3.2rem;
   filter: invert(1);
   cursor: pointer;
-}
-@media (min-width: 1126px) {
-  .menu {
-    display: none;
-  }
 }
 @media (max-width: 700px) {
   .menu {
@@ -252,11 +249,6 @@ input:focus {
   box-shadow: 5px 8px 15px rgba(0, 0, 0, 0.9);
   transition: all 0.4s ease-out;
   padding: 60px;
-}
-@media (min-width: 1126px) {
-  .menu-container {
-    display: none;
-  }
 }
 @media (max-width: 700px) {
   .menu-container {
@@ -303,6 +295,11 @@ input:focus {
   cursor: pointer;
 }
 
+@media (min-width: 1126px) {
+  .menu, .menu-container {
+    display: none;
+  }
+}
 .alert-main {
   position: relative;
 }
@@ -343,13 +340,13 @@ input:focus {
   color: #316C2E;
   padding: 0.8rem;
   font-weight: 450;
-  position: absolute;
-  top: 1.9rem;
+  position: fixed;
+  top: 4.5vh;
   border: 2.3px solid #34BC2D;
-  opacity: 0.9;
+  opacity: 0.85;
   border-radius: 10px;
   z-index: 90;
-  animation: 0.3s up ease-in alternate-reverse;
+  animation: 0.5s up ease-in alternate-reverse;
 }
 
 @keyframes up {
@@ -358,10 +355,26 @@ input:focus {
     opacity: 0;
   }
   from {
-    top: 1.9rem;
-    opacity: 0.9;
+    top: 4.5vh;
+    opacity: 0.85;
   }
 }
+.msg-parent {
+  position: relative;
+  top: 0.6em;
+}
+
+.msg-delete {
+  background-color: #7175a3;
+  color: white;
+  padding: 0.8895em 0.4em;
+  position: absolute;
+  border-radius: 5px;
+  right: -5px;
+  font-size: 0.82em;
+  z-index: 80;
+}
+
 .loading {
   display: flex;
   justify-content: center;
@@ -374,13 +387,34 @@ input:focus {
   border: 2px solid #162447;
   border-radius: 50%;
   border-top: 2px solid #EB4460;
-  animation: 1s spinner infinite;
+  animation: 0.9s spinner infinite;
+  -webkit-animation: 1s spinner infinite;
 }
 
 @keyframes spinner {
   to {
-    rotate: 360deg;
+    transform: rotate(360deg);
   }
+  from {
+    transform: rotate(0deg);
+  }
+}
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 0.85;
+  transition: opacity 500ms ease-in;
+}
+
+.fade-exit {
+  opacity: 0.85;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 500ms linear;
 }
 
 /*# sourceMappingURL=styles.css.map */

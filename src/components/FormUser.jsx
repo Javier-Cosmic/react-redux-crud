@@ -27,7 +27,7 @@ const Form = ({ menu }) => {
     const existError = () => {
         if(error){
             dispatch(showAlert(error));
-            console.log('debuggeando los errores')
+
             setTimeout(() => {
                 dispatch(hiddeAlert());
             }, 3000);
@@ -35,9 +35,11 @@ const Form = ({ menu }) => {
     }
 
     useEffect(() => {
+
         //verificar si hay datos en el usuario actual
         if (usercurrent !== null) {
             setUser(usercurrent);
+
         } else {
             setUser({
                 rut: '',
@@ -47,11 +49,12 @@ const Form = ({ menu }) => {
                 nationality: '',
                 cellphone: '',
             });
+
             //verificar alertas de error
-            existError();
+            existError();  
         }
-
-
+        
+        //eslint-disable-next-line
     }, [usercurrent, error]);
 
     const onChange = (e) => {
@@ -90,7 +93,7 @@ const Form = ({ menu }) => {
                 nationality.trim() === '' ||
                 cellphone.trim() === ''
             ) {
-                dispatch(showAlert('Los campos son obligatorios.'));
+                dispatch(showAlert('Los campos son obligatorios'));
 
                 setTimeout(() => {
                     dispatch(hiddeAlert());
