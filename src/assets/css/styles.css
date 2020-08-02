@@ -12,6 +12,33 @@ body {
   font-size: 16px;
 }
 
+.logo-main {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 3.3rem;
+  height: 3.3rem;
+  margin-top: 2.3rem;
+  animation: 2s spinner infinite linear;
+}
+
+.text-footer {
+  text-align: center;
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: #162447;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(0deg);
+  }
+  from {
+    transform: rotate(360deg);
+  }
+}
 .main {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -104,10 +131,19 @@ input:focus {
   border-bottom: 2px solid #EB4460;
 }
 
+.clean-field {
+  cursor: pointer;
+  font-size: 12px;
+  color: #8191BC;
+  background: none;
+  border-style: none;
+  margin-top: 0.8rem;
+  margin-bottom: -27px;
+}
+
 @media (max-width: 1126px) {
   .form-user {
     display: none;
-    transition: all 1s;
   }
 
   .form-menu {

@@ -8,6 +8,7 @@ import {
     DELETE_USER_DATA,
     MENU,
     LOADING_SPINNER,
+    CLEAN_USER
 } from '../types';
 
 const initialState = {
@@ -93,6 +94,13 @@ export default (state = initialState, action) => {
                 menu: !state.menu,
                 usercurrent: null,
             };
+
+        case CLEAN_USER:{
+            return{
+                ...state,
+                usercurrent: action.payload
+            }
+        }
 
         default:
             return state;

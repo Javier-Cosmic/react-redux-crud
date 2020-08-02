@@ -1,6 +1,8 @@
 export const MENU = 'MENU';
 export const LOADING_SPINNER = 'LOADING_SPINNER';
 export const LOADING = 'LOADING';
+export const CLEAN = 'CLEAN';
+export const CLEAN_USER = 'CLEAN_USER';
 
 export const ALERT = 'ALERT';
 export const ALERT_SUCCESS = 'ALERT_SUCCESS';

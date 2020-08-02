@@ -11,7 +11,9 @@ import {
     DELETE_USER,
     DELETE_USER_DATA,
     MENU,
-    LOADING_SPINNER
+    LOADING_SPINNER,
+    CLEAN,
+    CLEAN_USER
 } from '../types';
 
 
@@ -33,6 +35,20 @@ export const msgSuccess = (success) => {
     return{
         type: MSG_SUCCESS,
         payload: success
+    }
+}
+
+export const cleanFields = (payload) => {
+    return{
+        type: CLEAN,
+        payload
+    }
+}
+
+export const cleanUser = (payload) => {
+    return{
+        type: CLEAN_USER,
+        payload
     }
 }
 

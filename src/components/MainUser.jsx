@@ -4,6 +4,7 @@ import { menuButton } from '../redux/actions/user-action';
 import menuBar from '../assets/icons/menu.svg';
 import { showSuccess, hiddeAlert } from '../redux/actions/alert-action';
 import Spinner from './Spinner';
+import logo from '../assets/icons/logo.png';
 import { CSSTransition } from 'react-transition-group';
 const ShowUser = React.lazy(() => import('./ShowUser'));
 const FormUser = React.lazy(() => import('./FormUser'));
@@ -33,7 +34,7 @@ const MainUser = () => {
 
             setTimeout(() => {
                 dispatch(hiddeAlert());
-            }, 3500)
+            }, 3500);
         }
     };
 
@@ -53,6 +54,19 @@ const MainUser = () => {
                     </span>
                 </p>
                 <FormUser menu={menu} />
+
+                {menu ? (
+                    <>
+                        <div className='logo-main'>
+                            <img
+                                src={logo}
+                                className='logo'
+                                alt='logo-react-redux'
+                            />
+                        </div>
+                        <p className='text-footer'>mobile design</p>
+                    </>
+                ) : null}
             </nav>
 
             {/* header */}
@@ -68,13 +82,8 @@ const MainUser = () => {
 
             {/* home */}
             <div className='main'>
-
                 {/* alerta de exito */}
-                <CSSTransition
-                    in={alert}
-                    timeout={500}
-                    classNames='fade'
-                >
+                <CSSTransition in={alert} timeout={500} classNames='fade'>
                     <>
                         {alertsuccess ? (
                             <div className='alert-success'>{alertsuccess}</div>

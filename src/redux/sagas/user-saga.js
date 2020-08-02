@@ -1,6 +1,6 @@
 import {put, call, takeLatest} from 'redux-saga/effects';
 import axios from 'axios';
-import {loadDataUsers} from '../actions/user-action';
+import {loadDataUsers, cleanUser} from '../actions/user-action';
 import {
     LOAD_USER, 
     ADD_USER, 
@@ -11,8 +11,8 @@ import {
     MSG_SUCCESS,
     DELETE_USER,
     DELETE_USER_DATA,
-    LOADING_SPINNER
-  
+    LOADING_SPINNER,
+    CLEAN
 } from '../types'
 
 const url = process.env.REACT_APP_API_URL
@@ -73,10 +73,15 @@ function* deleteUser({ payload }){
     }
 }
 
+function* clean({payload}){
+    yield put (cleanUser(payload));
+}
+
 export default function* users(){
 
     yield takeLatest(LOAD_USER, getUsers);
     yield takeLatest(ADD_USER, addUser);
     yield takeLatest(EDIT_USER, udpateUser);
     yield takeLatest(DELETE_USER, deleteUser);
+    yield takeLatest(CLEAN, clean);
 }

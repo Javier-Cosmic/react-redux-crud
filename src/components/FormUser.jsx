@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    addUser,
-    editUser
-} from '../redux/actions/user-action';
+import { addUser, editUser, cleanFields } from '../redux/actions/user-action';
 import { showAlert, hiddeAlert } from '../redux/actions/alert-action';
+import { CSSTransition } from 'react-transition-group';
 
 const Form = ({ menu }) => {
     const dispatch = useDispatch();
     const usercurrent = useSelector((state) => state.user_reducer.usercurrent);
     const alert = useSelector((state) => state.alert_reducer.alert);
-    const error = useSelector(state => state.user_reducer.error);
+    const error = useSelector((state) => state.user_reducer.error);
 
     const empty = {
         rut: '',
@@ -25,21 +23,19 @@ const Form = ({ menu }) => {
     const { rut, name, lastname, age, nationality, cellphone } = user;
 
     const existError = () => {
-        if(error){
+        if (error) {
             dispatch(showAlert(error));
 
             setTimeout(() => {
                 dispatch(hiddeAlert());
             }, 3000);
         }
-    }
+    };
 
     useEffect(() => {
-
         //verificar si hay datos en el usuario actual
         if (usercurrent !== null) {
             setUser(usercurrent);
-
         } else {
             setUser({
                 rut: '',
@@ -51,9 +47,9 @@ const Form = ({ menu }) => {
             });
 
             //verificar alertas de error
-            existError();  
+            existError();
         }
-        
+
         //eslint-disable-next-line
     }, [usercurrent, error]);
 
@@ -82,8 +78,7 @@ const Form = ({ menu }) => {
                 })
             );
 
-            setUser(empty); 
-
+            setUser(empty);
         } else {
             if (
                 rut.trim() === '' ||
@@ -113,14 +108,19 @@ const Form = ({ menu }) => {
                     cellphone,
                 })
             );
-            
-            setUser(empty)
+
+            setUser(empty);
         }
+    };
+
+    const clean = () => {
+        dispatch(cleanFields(null));
     };
 
     return (
         <>
             <div className={menu ? 'form-menu' : 'form-user'}>
+                <CSSTransition in={menu} timeout={500} classNames='fade'>
                 <form onSubmit={onSubmit}>
                     <div className='form-inside'>
                         <label>Rut</label>
@@ -170,16 +170,33 @@ const Form = ({ menu }) => {
                                 <div className='alert'>{alert}</div>
                             </div>
                         ) : (
-                            <input
-                                type='submit'
-                                className='button-submit'
-                                value={
-                                    usercurrent !== null ? 'Editar' : 'Agregar'
-                                }
-                            />
+                            <>
+                                {usercurrent !== null ? (
+                                    <>
+                                        <input
+                                            type='submit'
+                                            className='button-submit'
+                                            value='Editar'
+                                        />
+                                        <p
+                                            className='clean-field'
+                                            onClick={clean}
+                                        >
+                                            Limpiar campos
+                                        </p>
+                                    </>
+                                ) : (
+                                    <input
+                                        type='submit'
+                                        className='button-submit'
+                                        value='Agregar'
+                                    />
+                                )}
+                            </>
                         )}
                     </div>
                 </form>
+                </CSSTransition>
             </div>
         </>
     );
